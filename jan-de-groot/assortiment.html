@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="nl" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Assortiment bestellen – Banketbakkerij Jan de Groot</title>
+  <meta name="description" content="Bestel Bossche bollen, gebakjes, taarten & vlaaien, hartige producten en meer bij Banketbakkerij Jan de Groot in ’s-Hertogenbosch.">
+  <meta name="theme-color" content="#d0357e">
+  <link rel="icon" href="https://www.bosschebollen.nl/layout/tab_logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="assortiment">
+<main>
+  <section class="page-hero">
+    <div class="wrap">
+      <nav class="crumbs reveal" aria-label="Kruimelpad"><a href="index.html">Home</a><span>/</span><span>Assortiment</span></nav>
+      <h1 class="reveal">Ons <em class="accent">assortiment</em></h1>
+      <p class="lead reveal">Stel hier uw bestelling samen. U rekent niet online af, maar betaalt met PIN wanneer u de bestelling komt ophalen of wanneer onze bezorger deze bij u aflevert.</p>
+    </div>
+  </section>
+
+  <div class="shop-bar">
+    <div class="wrap">
+      <div class="chips" role="group" aria-label="Categorieën" id="chips"></div>
+      <label class="search">
+        <span data-icon="search"></span>
+        <input type="search" id="q" placeholder="Zoek een product" aria-label="Zoek een product" autocomplete="off">
+      </label>
+    </div>
+  </div>
+
+  <section class="section" style="padding-top:40px">
+    <div class="wrap">
+      <div class="shop-notice reveal">
+        <span data-icon="info"></span>
+        <p><b>Let op:</b> normale Bossche bollen hoeven niet van tevoren besteld te worden. Mini- en grote bollen wel. Op zaterdag garanderen we tot 16:00 uur Bossche bollen, daarna is het op = op. Bij meer dan 100 bollen graag even <a href="contact.html">contact opnemen</a>.</p>
+      </div>
+      <div id="catalog"></div>
+      <div class="empty-state" id="empty" hidden>
+        <h3>Geen producten gevonden</h3>
+        <p>Probeer een andere zoekterm of bekijk alle categorieën.</p>
+      </div>
+    </div>
+  </section>
+</main>
+<script src="js/data.js"></script>
+<script src="js/main.js"></script>
+<script>
+  const catalog = document.getElementById('catalog');
+  const chips = document.getElementById('chips');
+  const q = document.getElementById('q');
+  let active = 'alle';
+
+  chips.innerHTML = `<button class="chip" type="button" data-cat="alle" aria-pressed="true">Alles <small>${PRODUCTS.length}</small></button>` +
+    CATEGORIES.map(c => `<button class="chip" type="button" data-cat="${c.key}" aria-pressed="false">${c.label} <small>${PRODUCTS.filter(p => p.cat === c.key).length}</small></button>`).join('');
+
+  catalog.innerHTML = CATEGORIES.map(c => {
+    const items = PRODUCTS.filter(p => p.cat === c.key);
+    return `<section class="cat-block" id="cat-${c.key}" data-block="${c.key}">
+      <div class="cat-block-head"><h2>${c.label}</h2><span data-count>${items.length} producten</span></div>
+      <div class="product-grid">${items.map((p, i) => productCard(p, i).replace('<article ', `<article data-name="${esc(p.name.toLowerCase())}" `)).join('')}</div>
+    </section>`;
+  }).join('');
+
+  function apply() {
+    const term = q.value.trim().toLowerCase();
+    let shown = 0;
+    document.querySelectorAll('.cat-block').forEach(block => {
+      const inCat = active === 'alle' || block.dataset.block === active;
+      let n = 0;
+      block.querySelectorAll('.pcard').forEach(card => {
+        const ok = inCat && (!term || card.dataset.name.includes(term));
+        card.hidden = !ok; if (ok) { n++; card.classList.add('in'); }
+      });
+      block.hidden = n === 0;
+      block.querySelector('[data-count]').textContent = n + (n === 1 ? ' product' : ' producten');
+      shown += n;
+    });
+    document.getElementById('empty').hidden = shown > 0;
+  }
+  function setCat(key, scroll) {
+    active = CATEGORIES.some(c => c.key === key) ? key : 'alle';
+    chips.querySelectorAll('.chip').forEach(c => c.setAttribute('aria-pressed', c.dataset.cat === active));
+    apply();
+    chips.querySelector(`[data-cat="${active}"]`).scrollIntoView({ inline: 'center', block: 'nearest', behavior: 'smooth' });
+    if (scroll) window.scrollTo({ top: document.querySelector('.shop-bar').offsetTop - 1, behavior: 'smooth' });
+  }
+  chips.addEventListener('click', e => {
+    const c = e.target.closest('.chip'); if (!c) return;
+    history.replaceState(null, '', c.dataset.cat === 'alle' ? location.pathname : '#' + c.dataset.cat);
+    setCat(c.dataset.cat, true);
+  });
+  q.addEventListener('input', apply);
+  window.addEventListener('hashchange', () => setCat(location.hash.slice(1), true));
+  setCat(location.hash.slice(1), !!location.hash);
+  observeReveals();
+</script>
+</body>
+</html>

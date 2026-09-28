@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="nl" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Werken bij – Banketbakkerij Jan de Groot</title>
+  <meta name="description" content="Werken bij Banketbakkerij Jan de Groot in ’s-Hertogenbosch. Bekijk onze vacatures en solliciteer met je CV en motivatie.">
+  <meta name="theme-color" content="#d0357e">
+  <link rel="icon" href="https://www.bosschebollen.nl/layout/tab_logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="vacatures">
+<main>
+  <section class="page-hero">
+    <div class="wrap">
+      <nav class="crumbs reveal" aria-label="Kruimelpad"><a href="index.html">Home</a><span>/</span><span>Vacatures</span></nav>
+      <h1 class="reveal">Werken bij <em class="accent">Jan de Groot</em></h1>
+      <p class="lead reveal">Lijkt het jou leuk om te werken bij Banketbakkerij Jan de Groot? Ben je bereid om je handen uit de mouwen te steken en vind je het leuk om binnen een hecht team werkzaam te zijn? Ben je stressbestendig en zie jij die rij voor de toonbank als een uitdaging? Dan ben je bij ons aan het juiste adres.</p>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:clamp(24px,4vw,48px)">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow reveal">Op dit moment zoeken wij</span>
+        <h2 class="reveal">Onze <em class="accent">vacatures</em></h2>
+      </div>
+      <div class="grid grid-3" id="vacatures"></div>
+    </div>
+  </section>
+
+  <section class="section section--pink">
+    <div class="wrap split" style="align-items:start">
+      <div>
+        <span class="eyebrow reveal">Solliciteren</span>
+        <h2 class="reveal">Stuur je <em class="accent">CV en motivatie</em></h2>
+        <p class="lead reveal">Stuur je sollicitatie, voorzien van CV en motivatie, naar het onderstaande (e-mail)adres.</p>
+        <div class="btn-row reveal" style="margin-top:26px">
+          <a class="btn" href="mailto:winkel@bosschebollen.nl?subject=Sollicitatie"><span data-icon="mail"></span> Solliciteer per e-mail</a>
+        </div>
+      </div>
+      <article class="card info-card reveal">
+        <span class="ic" data-icon="pin"></span>
+        <h3>Banketbakkerij Jan de Groot</h3>
+        <p class="big">Stationsweg 24<br>5211 TW ’s-Hertogenbosch</p>
+        <p class="big" style="font-size:1.1rem"><a href="mailto:winkel@bosschebollen.nl">winkel@bosschebollen.nl</a></p>
+      </article>
+    </div>
+  </section>
+</main>
+<script src="js/data.js"></script>
+<script src="js/main.js"></script>
+<script>
+  document.getElementById('vacatures').innerHTML = VACATURES.map((v, i) => `
+    <article class="card feature reveal" style="--d:${i * .06}s">
+      <span class="ic">${i === 2 ? ICON.store : ICON.cake}</span>
+      <h3>${esc(v.title)}</h3>
+      <p>${esc(v.text)}</p>
+      <div class="meta">${v.tags.map(t => `<span class="tag">${esc(t)}</span>`).join('')}</div>
+      <a class="link-arrow" style="margin-top:18px" href="mailto:winkel@bosschebollen.nl?subject=${encodeURIComponent('Sollicitatie: ' + v.title.replace(/^Een /, ''))}">Solliciteer ${ICON.arrow}</a>
+    </article>`).join('');
+  observeReveals();
+</script>
+</body>
+</html>

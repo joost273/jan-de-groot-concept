@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="nl" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Contact – Banketbakkerij Jan de Groot</title>
+  <meta name="description" content="Neem contact op met Banketbakkerij Jan de Groot in ’s-Hertogenbosch: 073 - 613 38 30 of winkel@bosschebollen.nl.">
+  <meta name="theme-color" content="#d0357e">
+  <link rel="icon" href="https://www.bosschebollen.nl/layout/tab_logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="contact">
+<main>
+  <section class="page-hero">
+    <div class="wrap">
+      <nav class="crumbs reveal" aria-label="Kruimelpad"><a href="index.html">Home</a><span>/</span><span>Contact</span></nav>
+      <h1 class="reveal">Wij helpen u <em class="accent">graag</em></h1>
+      <p class="lead reveal">Heeft u vragen over onze producten, bestellingen of deze website? Neem dan contact met ons op. Zoekt u onze openingstijden? Die vindt u bij <a href="waar-wanneer.html">Waar & Wanneer</a>.</p>
+    </div>
+  </section>
+
+  <section class="section--tight" style="padding-top:8px">
+    <div class="wrap grid grid-3">
+      <a class="card info-card reveal" data-phone-card style="text-decoration:none;color:inherit">
+        <span class="ic" data-icon="phone"></span>
+        <h3>Bel ons</h3>
+        <p class="big" data-phone></p>
+        <p class="muted small">Voor reserveringen, high tea, lunchproeverij en grote bestellingen.</p>
+        <span class="link-arrow" style="margin-top:auto">Nu bellen <span data-icon="arrow"></span></span>
+      </a>
+      <a class="card info-card reveal" style="--d:.06s;text-decoration:none;color:inherit" data-mail-card>
+        <span class="ic" data-icon="mail"></span>
+        <h3>Mail ons</h3>
+        <p class="big" data-mail style="font-size:1.15rem;word-break:break-word"></p>
+        <p class="muted small">Wij reageren zo snel mogelijk op uw bericht.</p>
+        <span class="link-arrow" style="margin-top:auto">E-mail sturen <span data-icon="arrow"></span></span>
+      </a>
+      <a class="card info-card reveal" style="--d:.12s;text-decoration:none;color:inherit" data-route>
+        <span class="ic" data-icon="pin"></span>
+        <h3>Bezoek ons</h3>
+        <p class="big">Stationsweg 24<br>5211 TW ’s-Hertogenbosch</p>
+        <span class="link-arrow" style="margin-top:auto">Plan uw route <span data-icon="arrow"></span></span>
+      </a>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap split" style="align-items:start">
+      <div>
+        <span class="eyebrow reveal">Reserveren</span>
+        <h2 class="reveal">Een tafel, high tea of <em class="accent">lunchproeverij</em></h2>
+        <p class="lead reveal">Reserveren doet u telefonisch op 073 - 613 38 30 of per e-mail via winkel@bosschebollen.nl.</p>
+      </div>
+      <div class="infobox reveal" style="margin-top:0">
+        <ul class="check-list">
+          <li><span data-icon="check"></span><span><b>Tafel reserveren</b>: mogelijk vanaf 6 personen.</span></li>
+          <li><span data-icon="check"></span><span><b>High tea</b>: de hele week te reserveren voor 2 tot maximaal 10 personen, met uitzondering van zaterdagen en schoolvakanties.</span></li>
+          <li><span data-icon="check"></span><span><b>Lunchproeverij</b>: van 12.30 tot 15.00 uur, alleen op reservering, met uitzondering van zaterdagen en de vakantieperiode.</span></li>
+          <li><span data-icon="check"></span><span><b>Meer dan 100 bollen</b> bestellen? Neem dan even contact met ons op.</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--warm">
+    <div class="wrap split">
+      <div>
+        <span class="eyebrow reveal">Werken bij</span>
+        <h2 class="reveal">Op zoek naar een <em class="accent">leuke baan?</em></h2>
+        <p class="lead reveal">Wij zijn op zoek naar een Bossche bollen vuller, een ervaren banketbakker en een winkel- & lunchroommedewerk(st)er.</p>
+        <a class="btn reveal" href="vacatures.html">Bekijk de vacatures <span data-icon="arrow"></span></a>
+      </div>
+      <div>
+        <span class="eyebrow reveal">Privacy</span>
+        <h2 class="reveal" style="font-size:clamp(1.6rem,2.6vw,2.2rem)">Uw gegevens</h2>
+        <p class="muted reveal">Hoe wij omgaan met uw persoonsgegevens, leest u in ons <a href="privacy.html">privacybeleid</a>.</p>
+        <div class="btn-row reveal" style="margin-top:22px">
+          <a class="btn btn--ghost btn--sm" data-fb target="_blank" rel="noopener"><span data-icon="facebook"></span> Facebook</a>
+          <a class="btn btn--ghost btn--sm" data-ig target="_blank" rel="noopener"><span data-icon="instagram"></span> Instagram</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+<script src="js/data.js"></script>
+<script src="js/main.js"></script>
+<script>
+  document.querySelector('[data-phone-card]').href = CONTACT.phoneHref;
+  document.querySelector('[data-mail-card]').href = 'mailto:' + CONTACT.email;
+  document.querySelector('[data-route]').href = CONTACT.route;
+  document.querySelector('[data-route]').target = '_blank';
+  document.querySelector('[data-phone]').textContent = CONTACT.phone;
+  document.querySelector('[data-mail]').textContent = CONTACT.email;
+  document.querySelector('[data-fb]').href = CONTACT.facebook;
+  document.querySelector('[data-ig]').href = CONTACT.instagram;
+</script>
+</body>
+</html>

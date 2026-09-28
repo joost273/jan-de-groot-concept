@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="nl" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bestellen – Banketbakkerij Jan de Groot</title>
+  <meta name="description" content="Controleer en plaats uw bestelling bij Banketbakkerij Jan de Groot. Betalen met PIN bij ophalen of bezorging.">
+  <meta name="theme-color" content="#d0357e">
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="https://www.bosschebollen.nl/layout/tab_logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="bestellen">
+<main>
+  <section class="page-hero" style="padding-bottom:32px">
+    <div class="wrap">
+      <nav class="crumbs" aria-label="Kruimelpad"><a href="index.html">Home</a><span>/</span><a href="assortiment.html">Assortiment</a><span>/</span><span>Bestellen</span></nav>
+      <h1>Uw <em class="accent">bestelling</em></h1>
+    </div>
+  </section>
+
+  <section style="padding-bottom:clamp(40px,6vw,80px)">
+    <div class="wrap">
+      <ol class="steps" id="steps">
+        <li data-s="1"><span>Winkel<span class="lbl-long">mand</span></span></li>
+        <li data-s="2"><span><span class="lbl-long">Uw </span>gegevens</span></li>
+        <li data-s="3"><span>Controleren</span></li>
+      </ol>
+
+      <div class="checkout">
+        <div>
+          <!-- Stap 1 -->
+          <div class="panel step" data-step-panel="1">
+            <h2>Winkelmand</h2>
+            <div id="cart-lines"></div>
+            <div class="step-nav" id="nav-1">
+              <a class="btn btn--ghost" href="assortiment.html">Verder winkelen</a>
+              <button class="btn" type="button" data-go="2">Naar uw gegevens <span data-icon="arrow"></span></button>
+            </div>
+          </div>
+
+          <!-- Stap 2 -->
+          <form class="panel step" data-step-panel="2" id="form" novalidate hidden>
+            <h2>Ophalen of bezorgen?</h2>
+            <div class="choice-grid">
+              <label class="choice">
+                <input type="radio" name="methode" value="ophalen" checked>
+                <span class="ic" data-icon="store"></span>
+                <span><b>Ophalen in de winkel</b><span>Stationsweg 24 · betalen met PIN</span></span>
+              </label>
+              <label class="choice">
+                <input type="radio" name="methode" value="bezorgen">
+                <span class="ic" data-icon="truck"></span>
+                <span><b>Laten bezorgen</b><span>+ € 4,00 · betalen met PIN aan de bezorger</span></span>
+              </label>
+            </div>
+            <div class="rule" style="margin:-8px 0 28px">
+              <span data-icon="info"></span><span>Op zaterdag dienen bestellingen vóór 16:00 uur te worden opgehaald.</span>
+            </div>
+
+            <h2>Uw gegevens</h2>
+            <div class="form-grid">
+              <div class="field full"><label for="naam">(Bedrijfs)naam <i>*</i></label><input id="naam" name="naam" autocomplete="name" required><div class="err">Vul uw naam in.</div></div>
+              <div class="field full"><label for="contact">Contactpersoon</label><input id="contact" name="contact" autocomplete="name"></div>
+              <div class="field full"><label for="adres">Adres <i class="addr-req" hidden>*</i></label><input id="adres" name="adres" autocomplete="street-address"><div class="err">Vul uw adres in voor bezorging.</div></div>
+              <div class="field"><label for="postcode">Postcode <i class="addr-req" hidden>*</i></label><input id="postcode" name="postcode" autocomplete="postal-code"><div class="err">Vul uw postcode in.</div></div>
+              <div class="field"><label for="woonplaats">Woonplaats <i class="addr-req" hidden>*</i></label><input id="woonplaats" name="woonplaats" autocomplete="address-level2"><div class="err">Vul uw woonplaats in.</div></div>
+              <div class="field"><label for="telefoon">Telefoon</label><input id="telefoon" name="telefoon" type="tel" autocomplete="tel"></div>
+              <div class="field"><label for="email">E-mail <i>*</i></label><input id="email" name="email" type="email" autocomplete="email" required><div class="err">Vul een geldig e-mailadres in.</div></div>
+              <div class="field full" id="privacy-field">
+                <label class="checkbox"><input type="checkbox" id="privacy" name="privacy"> <span>Ik ga akkoord met het <a href="privacy.html" target="_blank">privacybeleid</a>. <i style="color:var(--pink);font-style:normal">*</i></span></label>
+                <div class="err">U dient akkoord te gaan met het privacybeleid.</div>
+              </div>
+            </div>
+            <p class="small muted" style="margin-top:18px">* Verplichte velden</p>
+            <div class="step-nav">
+              <button class="btn btn--ghost" type="button" data-go="1">Terug</button>
+              <button class="btn" type="submit">Bestelling controleren <span data-icon="arrow"></span></button>
+            </div>
+          </form>
+
+          <!-- Stap 3 -->
+          <div class="panel step" data-step-panel="3" hidden>
+            <h2>Controleer uw bestelling</h2>
+            <div id="review"></div>
+            <div class="step-nav">
+              <button class="btn btn--ghost" type="button" data-go="2">Gegevens wijzigen</button>
+              <button class="btn" type="button" id="place">Bestelling plaatsen <span data-icon="check"></span></button>
+            </div>
+          </div>
+
+          <!-- Bevestiging -->
+          <div class="panel step" data-step-panel="4" hidden>
+            <div class="success">
+              <div class="ic"><span data-icon="check"></span></div>
+              <h2>Bedankt voor uw bestelling!</h2>
+              <p class="lead" style="margin:0 auto 12px">Uw bestelling is ontvangen. U betaalt met PIN bij het ophalen of wanneer onze bezorger de bestelling bij u aflevert.</p>
+              <p class="muted small">Vragen? Bel <a href="tel:+31736133830">073 - 613 38 30</a> of mail <a href="mailto:winkel@bosschebollen.nl">winkel@bosschebollen.nl</a>.</p>
+              <div class="btn-row" style="justify-content:center;margin-top:24px"><a class="btn" href="index.html">Terug naar home</a></div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="panel summary" id="summary"></aside>
+      </div>
+    </div>
+  </section>
+</main>
+<script src="js/data.js"></script>
+<script src="js/main.js"></script>
+<script>
+  const form = document.getElementById('form');
+  let step = 1;
+  const method = () => form.methode.value;
+
+  function renderLines() {
+    const lines = Cart.lines();
+    const el = document.getElementById('cart-lines');
+    document.querySelector('#nav-1 [data-go="2"]').disabled = !lines.length;
+    if (!lines.length) {
+      el.innerHTML = `<div class="cart-empty"><div class="ic">${ICON.bag}</div><h3>Uw winkelmand is nog leeg</h3><p class="muted">Voeg producten toe vanuit het assortiment.</p>
+        <div class="btn-row" style="justify-content:center;margin-top:18px"><a class="btn btn--sm" href="bossche-bol.html">Bossche Bollen</a><a class="btn btn--ghost btn--sm" href="assortiment.html">Assortiment</a></div></div>`;
+      return;
+    }
+    el.innerHTML = lines.map(lineHTML).join('') + rulesHTML() +
+      `<div style="margin-top:14px"><button class="remove" type="button" id="clear" style="border:0;background:none;color:var(--ink-3);text-decoration:underline;text-underline-offset:3px;font-size:.88rem">Winkelmand leegmaken</button></div>`;
+  }
+
+  function renderSummary() {
+    const lines = Cart.lines();
+    const fee = method() === 'bezorgen' ? DELIVERY_FEE : 0;
+    const count = Cart.count();
+    document.getElementById('summary').innerHTML = `
+      <h3 style="font-size:1.35rem">Overzicht</h3>
+      <div class="sum-row"><span class="muted">${count} ${count === 1 ? 'artikel' : 'artikelen'}</span><span>${euro(Cart.total())}</span></div>
+      <div class="sum-row"><span class="muted">${method() === 'bezorgen' ? 'Bezorgen' : 'Ophalen in de winkel'}</span><span>${fee ? euro(fee) : 'Gratis'}</span></div>
+      <div class="sum-row total"><span>Totaal</span><strong>${euro(Cart.total() + fee)}</strong></div>
+      <div class="rule" style="margin-top:18px">${ICON.card}<span><b>Geen online betaling.</b> U betaalt met PIN bij het ophalen of wanneer onze bezorger de bestelling bij u aflevert.</span></div>
+      ${lines.length ? '' : ''}`;
+  }
+
+  function go(n) {
+    if (n > 1 && !Cart.lines().length) n = 1;
+    step = n;
+    document.querySelectorAll('[data-step-panel]').forEach(p => p.hidden = +p.dataset.stepPanel !== n);
+    document.querySelectorAll('#steps li').forEach(li => {
+      const s = +li.dataset.s;
+      li.classList.toggle('is-active', s === n);
+      li.classList.toggle('is-done', s < n);
+    });
+    document.getElementById('summary').hidden = n === 4;
+    document.querySelector('.checkout').style.gridTemplateColumns = n === 4 ? '1fr' : '';
+    if (n === 3) renderReview();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function syncAddressRequired() {
+    const need = method() === 'bezorgen';
+    document.querySelectorAll('.addr-req').forEach(i => i.hidden = !need);
+    ['adres', 'postcode', 'woonplaats'].forEach(id => { form[id].required = need; if (!need) form[id].closest('.field').classList.remove('invalid'); });
+  }
+
+  function validate() {
+    let ok = true, first;
+    ['naam', 'email', 'adres', 'postcode', 'woonplaats'].forEach(id => {
+      const input = form[id];
+      let valid = !input.required || input.value.trim() !== '';
+      if (id === 'email') valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(input.value.trim());
+      input.closest('.field').classList.toggle('invalid', !valid);
+      if (!valid) { ok = false; first = first || input; }
+    });
+    const pv = form.privacy.checked;
+    document.getElementById('privacy-field').classList.toggle('invalid', !pv);
+    if (!pv) { ok = false; first = first || form.privacy; }
+    if (first) first.focus();
+    return ok;
+  }
+
+  function renderReview() {
+    const f = Object.fromEntries(new FormData(form));
+    const bez = f.methode === 'bezorgen';
+    const addr = [f.adres, [f.postcode, f.woonplaats].filter(Boolean).join(' ')].filter(Boolean).map(esc).join('<br>');
+    document.getElementById('review').innerHTML = `
+      <div class="review-block"><h4>Producten</h4>
+        ${Cart.lines().map(l => `<div class="sum-row" style="padding:4px 0"><span>${l.q}× ${esc(l.p.name)}</span><span>${euro(l.q * l.p.price)}</span></div>`).join('')}
+        ${rulesHTML()}
+      </div>
+      <div class="review-block"><h4>${bez ? 'Bezorgen' : 'Ophalen'}</h4>
+        <p>${bez ? (addr || '—') : 'Banketbakkerij Jan de Groot, Stationsweg 24, ’s-Hertogenbosch'}</p></div>
+      <div class="review-block"><h4>Contactgegevens</h4>
+        <p>${esc(f.naam)}${f.contact ? ' · t.a.v. ' + esc(f.contact) : ''}<br>${esc(f.email)}${f.telefoon ? '<br>' + esc(f.telefoon) : ''}${!bez && addr ? '<br>' + addr : ''}</p></div>
+      <div class="review-block" style="border:0"><h4>Betaling</h4><p>Met PIN ${bez ? 'aan de bezorger' : 'bij het ophalen'}.</p></div>`;
+  }
+
+  document.addEventListener('click', e => {
+    const g = e.target.closest('[data-go]');
+    if (g) go(+g.dataset.go);
+    if (e.target.id === 'clear') Cart.clear();
+  });
+  form.addEventListener('change', e => { if (e.target.name === 'methode') { syncAddressRequired(); renderSummary(); } });
+  form.addEventListener('input', e => e.target.closest('.field')?.classList.remove('invalid'));
+  form.addEventListener('submit', e => { e.preventDefault(); if (validate()) go(3); });
+  document.getElementById('place').addEventListener('click', () => {
+    // Prototype: in de live-versie wordt de bestelling hier naar de winkel verstuurd.
+    Cart.clear();
+    go(4);
+  });
+  document.addEventListener('cart:change', () => { if (step !== 4) { renderLines(); renderSummary(); if (!Cart.lines().length && step > 1) go(1); } });
+
+  syncAddressRequired();
+  renderLines();
+  renderSummary();
+  go(1);
+</script>
+</body>
+</html>
